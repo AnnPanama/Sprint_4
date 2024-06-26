@@ -7,9 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class MainPage {
-    // драйвер
-    private WebDriver driver;
+public class MainPage extends BasePage {
+
 
     //кнопка Заказать вверху страницы
     private By  orderButtonTopPage=By.xpath(".//button[@class='Button_Button__ra12g']");
@@ -20,9 +19,15 @@ public class MainPage {
     //Локатор для формы заказа
     private By orderFormContent=By.xpath(".//div[@class='Order_Content__bmtHS']");
 
+    // Локатор вопросы о важном
+    private By question=By.xpath(".//div[@class='accordion__item']");
+
+    //Локатор для ответов
+    private By responsePriceAndPayment=By.xpath(".//div[@class='accordion__panel']/p");
+
     //Конструктор для класса
     public MainPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     //метод клика по любой кнопке с проверкой, что кнопка включена
@@ -32,9 +37,9 @@ public class MainPage {
         driver.findElement(button).click();
     }
 
-    //метод ожидания загрузки любого переданного элемента
-    public void waitForLoadElement (By element){
-        new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.visibilityOfElementLocated(element));
+    //метод проверки видимости формы ввода
+    public boolean isVisibleInputForm(){
+       return wait.until(ExpectedConditions.visibilityOfElementLocated(orderFormContent)).isEnabled();
     }
+
 }

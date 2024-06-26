@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class QuestionsPage {
+    //Класс раздела "Вопросы о важном"
+
     // драйвер
     private WebDriver driver;
+    //Локатор для Вопросов:
+    private By question=By.xpath(".//div[@class='accordion__item']");
 
-    //Вопросом "Сколько это стоит? И как оплатить?"
-    private By questionHowMuchAndPay=By.xpath(".//div[@id='accordion__heading-16']");
-    //Текст ответа по стоимости и оплате
-    private By responsePriceAndPayment=By.xpath(".//div[@id='accordion__panel-16']");
+    //Локатор для ответов
+    private By responsePriceAndPayment=By.xpath(".//div[@class='accordion__panel']/p");
 
 }

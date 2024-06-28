@@ -1,6 +1,7 @@
 package ru.yandex.pageobject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -57,8 +58,14 @@ public class OrderForm extends BasePage {
     }
     public OrderForm clickOrderButtonBottomPage() {
 
-        driver.findElement(orderButtonBottomPage).isEnabled();
-        driver.findElement(orderButtonBottomPage).click();
+      //  driver.manage().window().maximize();
+ wait.until(ExpectedConditions.visibilityOfElementLocated(orderFormContent));
+//   ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath(".//div[@class='Home_RoadMap__2tal_']")));//orderButtonBottomPage);
+((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath(".//button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']")));//orderButtonBottomPage);
+        //((JavascriptExecutor)driver).executeScript("scroll(0,-1260);");
+
+    //  driver.findElement(orderButtonBottomPage).isEnabled();
+  driver.findElement(orderButtonBottomPage).click();
         return this;
     }
 
@@ -107,12 +114,16 @@ public class OrderForm extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(colorScooter)).click();
         return this;
     }
-    public OrderForm setComment(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(commentForCourier)).click();
+    public OrderForm setComment(String comment){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(commentForCourier)).sendKeys(comment);
         return this;
     }
     public OrderForm clickOrderButton(){
         driver.findElement(orderButton).click();
+        return this;
+    }
+    public OrderForm clickButtonYes(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonYes)).click();
         return this;
     }
 

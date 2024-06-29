@@ -5,31 +5,56 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-//@RunWith(Parameterized.class)
+@RunWith(Parameterized.class)
 public class OrderFormTest extends BaseTest {
+    private String nameUser;
+    private String lastName;
+    private String address;
+    private String phoneNumber;
+    private String comment;
+    private boolean expectedResult;
+
+    public OrderFormTest(String nameUser, String lastName, String address, String phoneNumber, String comment, boolean expectedResult) {
+        this.nameUser = nameUser;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.comment = comment;
+        this.expectedResult = expectedResult;
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] getData(){
+        return new Object[][]{
+                {"Вася","Пупкин","Чкалово 3","123456789012","Жду сильно",true},
+                {"Люся","Чеботина","Защитников5","883456789012","Жду еще сильее",true}
+        };
+    }
+
     @Test
     public void checkingFillingOutScooterOrderFormButtonTop() {
-
         boolean isVisiblePopUpWindowOrder = new OrderForm(driver)
                 .clickOrderButtonTopPage()
-                .setName("Вася")
-                .setLastName("Пупкин")
-                .setAddress("Чкалово 3")
+                .setName(nameUser)
+                .setLastName(lastName)
+                .setAddress(address)
                 .setMetroStation()
-                .setPhoneNumber("123456789012")
+                .setPhoneNumber(phoneNumber)
                 .clickButtonNext()
                 .setCalendarDay()
                 .setRentalPeriod()
                 .setColorScooter()
-                .setComment("Ляляляляля")
+                .setComment(comment)
                 .clickOrderButton()
                 .clickButtonYes()
                 .isVisiblePopUpWindow();
 
-        assertTrue(isVisiblePopUpWindowOrder);
+        assertEquals(expectedResult,isVisiblePopUpWindowOrder);
     }
 
     @Test
@@ -37,32 +62,20 @@ public class OrderFormTest extends BaseTest {
 
         boolean isVisiblePopUpWindowOrder = new OrderForm(driver)
                 .clickOrderButtonBottomPage()
-                .setName("Вася")
-                .setLastName("Пупкин")
-                .setAddress("Чкалово 3")
+                .setName(nameUser)
+                .setLastName(lastName)
+                .setAddress(address)
                 .setMetroStation()
-                .setPhoneNumber("123456789012")
+                .setPhoneNumber(phoneNumber)
                 .clickButtonNext()
                 .setCalendarDay()
                 .setRentalPeriod()
                 .setColorScooter()
-                .setComment("Ляляляляля")
+                .setComment(comment)
                 .clickOrderButton()
                 .clickButtonYes()
                 .isVisiblePopUpWindow();
 
-        assertTrue(isVisiblePopUpWindowOrder);
-    }
-
-    @Test
-    public void scroll(){
-//        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",
-//                driver.findElement(By.xpath(".//div[@class='Home_FourPart__1uthg']")));
-
-  //     driver.findElement(By.xpath(".//div[@class='Home_FourPart__1uthg']")).click();
-
-((JavascriptExecutor)driver).executeScript("scroll(0, 1260px);");
-        System.out.println("kfkfkfkf");
-
+        assertEquals(expectedResult,isVisiblePopUpWindowOrder);
     }
 }

@@ -13,9 +13,9 @@ public class BaseTest {
 
     @Before
     public void setUpDriver() {
-        String driverType = System.getenv("WEB_DRIVER");
-        driver = getDriver(driverType == null ? "chrome" : driverType);
-       // driver=getDriver("chrome");
+        //String driverType = System.getenv("WEB_DRIVER");
+        //driver = getDriver(driverType == null ? "chrome" : driverType);
+       driver=getDriver("chrome" ); //"firefox"
         driver.get(MainPage.URL);
         setCookie(new Cookie("Cartoshka", "true"));
         setCookie(new Cookie("Cartoshka-legacy", "true"));

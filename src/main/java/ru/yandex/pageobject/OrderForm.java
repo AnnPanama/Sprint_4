@@ -85,10 +85,15 @@ public class OrderForm extends BasePage {
         return this;
     }
 
-    //метод клика по кнопке Заказать внизу страницы
-    public OrderForm clickOrderButtonBottomPage() {
+    //скролл для Кнопки внизу
+    public OrderForm scrollBottom(){
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
                 driver.findElement(By.xpath(".//div[@class='Home_FinishButton__1_cWm']")));
+        return this;
+    }
+
+    //метод клика по кнопке Заказать внизу страницы
+    public OrderForm clickOrderButtonBottomPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(orderButtonBottomPage)).click();
         return this;
     }

@@ -61,6 +61,7 @@ public class OrderFormTest extends BaseTest {
     public void checkingFillingOutScooterOrderFormButtonBottom() {
 
         boolean isVisiblePopUpWindowOrder = new OrderForm(driver)
+                .scrollBottom()
                 .clickOrderButtonBottomPage()
                 .setName(nameUser)
                 .setLastName(lastName)

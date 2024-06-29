@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.*;
 
-public class OrderForm extends BasePage {
+public class OrderForm extends MainPage {
 
     //кнопка Заказать вверху страницы
     private By orderButtonTopPage = By.xpath(".//button[@class='Button_Button__ra12g']");
@@ -70,6 +70,15 @@ public class OrderForm extends BasePage {
 
     // всплывающее окно с сообщением об успешном создании заказа "Заказ оформлен"
     private By popUpWindow = By.xpath(".//div[text()='Заказ оформлен']");
+
+    // Локаторы для Дополнительные тестовые сценарии
+
+    // локатор текста ошибки при неверно заполненном поле Имя
+    private By errorMessageForName=By.xpath(".//div[text()='Введите корректное имя']");
+    private By errorMessageForLastName=By.xpath(".//div[text()='Введите корректную фамилию']");
+    private By errorMessageForAdress=By.xpath(".//div[text()='Введите корректный адрес']");
+    private By errorMessageForMetro=By.xpath(".//div[@class='Order_MetroError__1BtZb']");
+    private By errorMessageForPhone=By.xpath(".//div[text()='Введите корректный номер']");
 
 
     //конструктор класса
@@ -181,7 +190,32 @@ public class OrderForm extends BasePage {
 
     // метод проверки всплывающего окно с сообщением об успешном создании заказа
     public boolean isVisiblePopUpWindow() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(popUpWindow)).isEnabled();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(popUpWindow)).isDisplayed();
     }
+
+
+    // ====== Для Дополнительные тестовые сценарии ===========
+    //проверки наличия сообщения об ошибке
+    public boolean isErrorMessageNamePresent(){
+        return driver.findElement(errorMessageForName).isDisplayed();
+    }
+    public boolean isErrorMessageLastNamePresent(){
+        return driver.findElement(errorMessageForLastName).isDisplayed();
+    }
+    public boolean isErrorMessageAdressPresent(){
+        return driver.findElement(errorMessageForAdress).isDisplayed();
+    }
+    public boolean isErrorMessageMetroPresent(){
+        return driver.findElement(errorMessageForMetro).isDisplayed();
+    }
+
+    public boolean isErrorMessagePhonePresent(){
+        return driver.findElement(errorMessageForPhone).isDisplayed();
+    }
+
+    public boolean isAllErrorMessageFormForWhomIsScooter(){
+        return isErrorMessageNamePresent() && isErrorMessageLastNamePresent()&& isErrorMessageAdressPresent()&& isErrorMessageMetroPresent()&&isErrorMessagePhonePresent();
+    }
+
 
 }
